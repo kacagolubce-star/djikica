@@ -1,0 +1,1028 @@
+<!doctype html>
+<html lang="sr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Djikica & Djiki — Izvini 🧸💛</title>
+  <style>
+    :root{
+      --bg1:#0b1020;
+      --bg2:#1a0b2e;
+      --card:#0f1633cc;
+      --text:#f3f4ff;
+      --muted:#b9bce6;
+      --accent:#ff5fa2;
+      --accent2:#7cf7ff;
+      --good:#6ef7a5;
+      --warn:#ffd37c;
+      --shadow: 0 18px 45px rgba(0,0,0,.45);
+      --radius: 22px;
+      --font: ui-rounded, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(1200px 800px at 20% 10%, #3a145a 0%, transparent 60%),
+        radial-gradient(900px 600px at 80% 20%, #103a60 0%, transparent 55%),
+        linear-gradient(160deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px 18px 80px;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom: 18px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      backdrop-filter: blur(10px);
+      user-select:none;
+    }
+    .badge b{ letter-spacing:.2px; }
+    .tiny{
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+      align-items:start;
+    }
+    @media (max-width: 880px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      backdrop-filter: blur(12px);
+    }
+
+    h1{
+      margin: 0 0 8px;
+      font-size: clamp(26px, 4vw, 40px);
+      line-height: 1.1;
+      letter-spacing: .2px;
+    }
+    p{
+      margin: 10px 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 15.5px;
+    }
+
+    .row{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    button{
+      border:0;
+      cursor:pointer;
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-weight: 650;
+      color: #0b1020;
+      transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+      user-select:none;
+      touch-action: manipulation;
+    }
+    button:active{ transform: translateY(1px) scale(.99); }
+    button:disabled{ opacity:.6; cursor:not-allowed; }
+
+    .btn-primary{
+      background: linear-gradient(135deg, var(--accent), #ffcf5f);
+      box-shadow: 0 14px 26px rgba(255,95,162,.22);
+    }
+    .btn-ghost{
+      background: rgba(255,255,255,.10);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,.18);
+    }
+    .btn-good{
+      background: linear-gradient(135deg, var(--good), var(--accent2));
+      box-shadow: 0 14px 26px rgba(124,247,255,.18);
+    }
+    .btn-warn{
+      background: linear-gradient(135deg, var(--warn), #ff7bb6);
+      box-shadow: 0 14px 26px rgba(255,211,124,.18);
+    }
+
+    .meter{
+      margin-top: 14px;
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.12);
+      overflow:hidden;
+    }
+    .meter > div{
+      height:100%;
+      width: 15%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent2), var(--accent));
+      transition: width .35s ease;
+    }
+
+    .mini{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .bearbox{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 10px 0 2px;
+    }
+
+    .bears{
+      width: min(420px, 100%);
+      aspect-ratio: 16/9;
+      border-radius: 18px;
+      background:
+        radial-gradient(120px 90px at 25% 45%, rgba(255,255,255,.16), transparent 60%),
+        radial-gradient(140px 100px at 70% 38%, rgba(255,255,255,.14), transparent 62%),
+        linear-gradient(135deg, rgba(255,95,162,.18), rgba(124,247,255,.12));
+      border: 1px solid rgba(255,255,255,.14);
+      position:relative;
+      overflow:hidden;
+      box-shadow: 0 18px 45px rgba(0,0,0,.28);
+    }
+
+    /* Cute simple bears (CSS) */
+    .bear{
+      position:absolute;
+      bottom: 10%;
+      width: 34%;
+      aspect-ratio: 1/1;
+      border-radius: 26px;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(6px);
+      transform: translateZ(0);
+    }
+    .bear:before, .bear:after{
+      content:"";
+      position:absolute;
+      top: -10%;
+      width: 28%;
+      aspect-ratio: 1/1;
+      border-radius: 50%;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+    .bear:before{ left: 10%; }
+    .bear:after{ right: 10%; }
+
+    .bear .face{
+      position:absolute;
+      inset: 18% 14% 14% 14%;
+      border-radius: 22px;
+      background: rgba(0,0,0,.10);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .bear .eye{
+      position:absolute;
+      top: 38%;
+      width: 12%;
+      aspect-ratio: 1/1;
+      border-radius: 50%;
+      background: rgba(255,255,255,.88);
+      box-shadow: 0 0 0 4px rgba(0,0,0,.12) inset;
+    }
+    .bear .eye.left{ left: 28%; }
+    .bear .eye.right{ right: 28%; }
+    .bear .snout{
+      position:absolute;
+      left: 50%;
+      top: 58%;
+      transform: translateX(-50%);
+      width: 34%;
+      height: 26%;
+      border-radius: 999px;
+      background: rgba(255,255,255,.20);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+    .bear .nose{
+      position:absolute;
+      left: 50%;
+      top: 10%;
+      transform: translateX(-50%);
+      width: 28%;
+      height: 30%;
+      border-radius: 999px;
+      background: rgba(0,0,0,.28);
+    }
+    .bear .smile{
+      position:absolute;
+      left: 50%;
+      top: 55%;
+      transform: translateX(-50%);
+      width: 38%;
+      height: 40%;
+      border-bottom: 3px solid rgba(255,255,255,.60);
+      border-radius: 0 0 999px 999px;
+      opacity:.9;
+    }
+
+    .bear.one{ left: 10%; }
+    .bear.two{ right: 10%; }
+
+    .label{
+      position:absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,.12);
+      font-weight: 700;
+      letter-spacing:.2px;
+    }
+    .dot{
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px rgba(255,95,162,.18);
+    }
+    .dot.blue{
+      background: var(--accent2);
+      box-shadow: 0 0 0 5px rgba(124,247,255,.18);
+    }
+
+    .heart{
+      position:absolute;
+      font-size: 22px;
+      opacity: .0;
+      transform: translateY(10px) scale(.9);
+      transition: opacity .25s ease, transform .35s ease;
+      user-select:none;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.25));
+    }
+    .heart.show{
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .list{
+      display:grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .choice{
+      padding: 12px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.07);
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+    }
+    .choice b{ color: var(--text); }
+    .choice span{ color: var(--muted); font-size: 14px; line-height: 1.35; }
+
+    .status{
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px dashed rgba(255,255,255,.22);
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      min-height: 70px;
+    }
+
+    .footer-note{
+      margin-top: 14px;
+      color: rgba(255,255,255,.55);
+      font-size: 12px;
+    }
+
+    /* Confetti canvas */
+    canvas{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index: 50;
+    }
+
+    .hidden{ display:none !important; }
+
+    .input{
+      width:100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      outline: none;
+      font-size: 14.5px;
+    }
+    .input::placeholder{ color: rgba(185,188,230,.7); }
+    .kbd{
+      display:inline-block;
+      padding: 2px 8px;
+      border-radius: 9px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.20);
+      font-size: 12px;
+      color: rgba(255,255,255,.75);
+      margin: 0 2px;
+    }
+
+    /* Mobile polish: buttons full-width */
+    @media (max-width: 520px){
+      .row{ flex-direction: column; }
+      .row button{ width: 100%; }
+    }
+
+    /* ===== LOVE PAGE ===== */
+    .lovePage{
+      position: fixed;
+      inset: 0;
+      z-index: 70;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(1000px 700px at 30% 20%, rgba(255,95,162,.25), transparent 60%),
+        radial-gradient(900px 650px at 80% 30%, rgba(124,247,255,.18), transparent 55%),
+        linear-gradient(160deg, #0b1020, #1a0b2e);
+    }
+
+    .loveCard{
+      text-align: center;
+      padding: 28px 22px;
+      border-radius: 26px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 20px 55px rgba(0,0,0,.45);
+      backdrop-filter: blur(12px);
+      max-width: 520px;
+      width: calc(100% - 36px);
+    }
+
+    .pulseHeart{
+      font-size: 120px;
+      line-height: 1;
+      margin-bottom: 12px;
+      animation: pulse 1.1s infinite;
+      filter: drop-shadow(0 14px 22px rgba(0,0,0,.35));
+    }
+    @keyframes pulse{
+      0%{ transform: scale(1); }
+      50%{ transform: scale(1.18); }
+      100%{ transform: scale(1); }
+    }
+
+    .loveTxt{
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: .2px;
+    }
+    .loveSub{
+      margin-top: 8px;
+      color: rgba(255,255,255,.75);
+      font-weight: 650;
+    }
+  </style>
+</head>
+
+<body>
+<canvas id="confetti"></canvas>
+
+<div class="wrap" id="mainWrap">
+  <div class="topbar">
+    <div class="badge">
+      <span aria-hidden="true">🧸</span>
+      <div>
+        <b>Djikica & Djiki</b><div class="tiny">mini apology quest</div>
+      </div>
+    </div>
+    <div class="badge" id="clockBadge">
+      <span aria-hidden="true">⏳</span>
+      <div>
+        <b id="timeTxt">—</b><div class="tiny">trenutak za mir</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <!-- LEFT: Story / steps -->
+    <div class="card">
+      <h1 id="title">Hej, Djiki… 💛</h1>
+      <p id="subtitle">
+        Ja sam tvoja <b>Djikica</b>. Znam da smo se sinoć posvađali.
+        Napravila sam mali interaktivni sajt da ti pokažem da mi je stalo i da želim da popravim stvari.
+      </p>
+
+      <div class="meter" aria-label="progress"><div id="bar"></div></div>
+
+      <div class="row" id="startRow">
+        <button class="btn-primary" id="btnStart">Kreni (30 sekundi) ✨</button>
+        <button class="btn-ghost" id="btnPeek">Samo da virnem 👀</button>
+      </div>
+
+      <div class="status hidden" id="statusBox"></div>
+
+      <div class="row hidden" id="stepRow">
+        <button class="btn-good" id="btnNext">Dalje ➜</button>
+        <button class="btn-ghost" id="btnBack">← Nazad</button>
+        <button class="btn-warn" id="btnSkip">Preskoči na kraj 🧡</button>
+      </div>
+
+      <div class="footer-note">
+        Tip: Klikni na medvediće za srca. Ako ti je teško — slobodno “Preskoči na kraj”.
+      </div>
+    </div>
+
+    <!-- RIGHT: Visual + mini interaction -->
+    <div class="card mini">
+      <div class="bearbox">
+        <div class="bears" id="bears">
+          <div class="label"><span class="dot"></span> Djikica <span class="dot blue"></span> Djiki</div>
+
+          <div class="bear one" data-name="Djikica" title="Djikica">
+            <div class="face">
+              <div class="eye left"></div>
+              <div class="eye right"></div>
+              <div class="snout">
+                <div class="nose"></div>
+                <div class="smile"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bear two" data-name="Djiki" title="Djiki">
+            <div class="face">
+              <div class="eye left"></div>
+              <div class="eye right"></div>
+              <div class="snout">
+                <div class="nose"></div>
+                <div class="smile"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="heart" id="heart">💗</div>
+        </div>
+      </div>
+
+      <div class="list" id="choices">
+        <div class="choice">
+          <div>🧩</div>
+          <div>
+            <b>Mini quest</b><br>
+            <span>3 kratka koraka, pa na kraju “dogovor”. Ništa naporno, samo slatko.</span>
+          </div>
+        </div>
+        <div class="choice">
+          <div>🧸</div>
+          <div>
+            <b>Klik na medvediće</b><br>
+            <span>Svaki klik pusti srca. 💛</span>
+          </div>
+        </div>
+        <div class="choice">
+          <div>🔐</div>
+          <div>
+            <b>Tajna reč</b><br>
+            <span>Na kraju postoji mali “password” (podrazumevano: <span class="kbd">djikica</span>).</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="status" id="sideStatus">
+        <b>Djikica kaže:</b><br>
+        Klikni na medvediće. 💛
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LOVE PAGE -->
+<div id="lovePage" class="lovePage hidden">
+  <div class="loveCard">
+    <div class="pulseHeart" aria-hidden="true">❤️</div>
+    <div class="loveTxt">Volim te, Djiki</div>
+    <div class="loveSub">Tvoja Djikica 💛</div>
+  </div>
+</div>
+
+<script>
+  const $ = (s) => document.querySelector(s);
+
+  // Clock badge
+  function tickClock(){
+    const d = new Date();
+    const hh = String(d.getHours()).padStart(2,'0');
+    const mm = String(d.getMinutes()).padStart(2,'0');
+    $("#timeTxt").textContent = `${hh}:${mm}`;
+  }
+  tickClock();
+  setInterval(tickClock, 1000*10);
+
+  // ===== Hearts on bears =====
+  const heart = $("#heart");
+  const bears = $("#bears");
+  const sideStatus = $("#sideStatus");
+
+  // Only Djikica has messages; Djiki has none.
+  const djikicaMessages = [
+    "Ja sam Djikica i žao mi je. 🥺",
+    "Ne želim hladan mod između nas.",
+    "Hoću da pričamo kao tim.",
+    "Hajde da se zagrlimo (bar virtualno).",
+    "Stalo mi je do tebe. Baš."
+  ];
+
+  function popHeart(x, y, emoji="💗"){
+    heart.textContent = emoji;
+    heart.style.left = (x - 10) + "px";
+    heart.style.top  = (y - 18) + "px";
+    heart.classList.add("show");
+    setTimeout(()=> heart.classList.remove("show"), 700);
+  }
+
+  function randomFrom(arr){
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  bears.addEventListener("click", (e)=>{
+    const bear = e.target.closest(".bear");
+    if(!bear) return;
+
+    const name = bear.dataset.name;
+    const rect = bears.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    // Hearts always appear for both bears
+    popHeart(x, y, name === "Djikica" ? "💗" : "💙");
+
+    // Message ONLY from Djikica (even if Djiki was clicked)
+    sideStatus.innerHTML = `<b>Djikica kaže:</b><br>${randomFrom(djikicaMessages)}`;
+  });
+
+  // ===== Mini quest steps =====
+  const steps = [
+    {
+      title: "Korak 1/3: Priznajem 🙈",
+      text:
+        "Sinoć nije ispalo kako treba. Ne tražim da odmah bude sve ok, samo želim da znaš da mi je žao i da sam tu.",
+      action: "Klikni ispod: Šta ti je najvažnije sada?",
+      options: [
+        { label: "Da me čuješ", value: "cujem" },
+        { label: "Da se smirimo", value: "smirimo" },
+        { label: "Da se zagrlimo", value: "zagrlimo" }
+      ]
+    },
+    {
+      title: "Korak 2/3: Biramo ‘mi’ 🤝",
+      text:
+        "Nisam protiv tebe, Djiki. Ja sam za nas. Hoću da slušam bez prekidanja i da pričam smireno.",
+      action: "Mala igra: izaberi 2 stvari koje želimo da bude pravilo ubuduće.",
+      options: [
+        { label: "Bez pasivne agresije", value: "bez_pasivne" },
+        { label: "Pauza kad eskalira", value: "pauza" },
+        { label: "Jedno po jedno — bez prebacivanja", value: "jedno_po_jedno" },
+        { label: "Zagrljaj pre spavanja", value: "zagrljaj_pre" }
+      ],
+      multi: 2
+    },
+    {
+      title: "Korak 3/3: Mali dogovor 🧡",
+      text:
+        "Ne moramo da rešimo sve odmah. Samo jedan mali korak ka miru — danas.",
+      action: "Upiši mini-plan (primer: ‘pričamo 10 min, pa čaj’):",
+      input: true,
+      placeholder: "Npr. ‘šetnja + pričamo mirno 10 min’"
+    }
+  ];
+
+  let stepIndex = -1;
+  let progress = 15;
+  let selections = { step0: null, step1: [], step2: "" };
+
+  const title = $("#title");
+  const subtitle = $("#subtitle");
+  const statusBox = $("#statusBox");
+  const bar = $("#bar");
+
+  const startRow = $("#startRow");
+  const stepRow = $("#stepRow");
+  const btnStart = $("#btnStart");
+  const btnPeek = $("#btnPeek");
+  const btnNext = $("#btnNext");
+  const btnBack = $("#btnBack");
+  const btnSkip = $("#btnSkip");
+
+  function setProgress(p){
+    progress = Math.max(0, Math.min(100, p));
+    bar.style.width = progress + "%";
+  }
+
+  function showStatus(html){
+    statusBox.classList.remove("hidden");
+    statusBox.innerHTML = html;
+  }
+
+  function hideStatus(){
+    statusBox.classList.add("hidden");
+    statusBox.innerHTML = "";
+  }
+
+  function renderStep(){
+    const s = steps[stepIndex];
+    title.textContent = s.title;
+    subtitle.textContent = s.text;
+
+    let html = `<b>${s.action}</b><div style="margin-top:10px"></div>`;
+
+    if(s.input){
+      html += `
+        <input class="input" id="planInput" placeholder="${s.placeholder || ""}" value="${escapeHtml(selections.step2 || "")}"/>
+        <div class="tiny" style="margin-top:8px">Ne mora savršeno. Samo da krene.</div>
+      `;
+    } else {
+      const isMulti = !!s.multi;
+      const chosen = (stepIndex===1) ? selections.step1 : selections.step0;
+
+      html += `<div class="list" id="optList">`;
+      s.options.forEach((o)=>{
+        const active = isMulti ? selections.step1.includes(o.value) : chosen === o.value;
+
+        html += `
+          <div class="choice" data-value="${o.value}" style="cursor:pointer; outline:${active ? '2px solid rgba(124,247,255,.55)' : 'none'}">
+            <div>${isMulti ? (active ? "✅" : "⬜") : (active ? "💛" : "🤍")}</div>
+            <div><b>${o.label}</b><br><span class="tiny">${isMulti ? "Klikni da izabereš/ukloniš" : "Klikni da izabereš"}</span></div>
+          </div>
+        `;
+      });
+      html += `</div>`;
+
+      if(isMulti){
+        html += `<div class="tiny" style="margin-top:8px">Izaberi tačno ${s.multi}.</div>`;
+      }
+    }
+
+    showStatus(html);
+
+    if(s.input){
+      const inp = $("#planInput");
+      inp.addEventListener("input", ()=>{ selections.step2 = inp.value.slice(0, 120); });
+    } else {
+      $("#optList").addEventListener("click", (e)=>{
+        const item = e.target.closest(".choice");
+        if(!item) return;
+        const val = item.dataset.value;
+
+        if(stepIndex === 0){
+          selections.step0 = val;
+          renderStep();
+          softConfetti(18);
+        } else if(stepIndex === 1){
+          const arr = selections.step1;
+          const i = arr.indexOf(val);
+          if(i >= 0) arr.splice(i,1);
+          else {
+            if(arr.length < 2) arr.push(val);
+            else popToast("Izaberi samo 2 🧸");
+          }
+          renderStep();
+          softConfetti(12);
+        }
+      });
+    }
+
+    startRow.classList.add("hidden");
+    stepRow.classList.remove("hidden");
+
+    btnBack.disabled = (stepIndex === 0);
+    btnNext.textContent = (stepIndex === steps.length-1) ? "Završi ✨" : "Dalje ➜";
+
+    const base = 15;
+    const stepP = (stepIndex+1) * (70/steps.length);
+    setProgress(base + stepP);
+  }
+
+  function canGoNext(){
+    if(stepIndex === 0) return !!selections.step0;
+    if(stepIndex === 1) return selections.step1.length === 2;
+    if(stepIndex === 2) return (selections.step2 || "").trim().length >= 3;
+    return true;
+  }
+
+  function finalScreen(){
+    setProgress(100);
+
+    const secretWord = "djikica"; // <- PROMENI ako hoćeš
+    title.textContent = "Kraj: Djikica & Djiki mirni mode 🧸💛";
+    subtitle.textContent =
+      "Ako želiš, možeš da otključaš ‘završni zagrljaj’ sa tajnom rečju. (Hint: djikica)";
+
+    showStatus(`
+      <b>Šta sam ja (Djikica) obećala:</b>
+      <div class="list" style="margin-top:10px">
+        <div class="choice"><div>🫶</div><div><b>Da slušam</b><br><span>${labelForStep0(selections.step0)}</span></div></div>
+        <div class="choice"><div>📌</div><div><b>Naša 2 pravila</b><br><span>${labelsForStep1(selections.step1).join(" + ")}</span></div></div>
+        <div class="choice"><div>🗓️</div><div><b>Mini-plan za danas</b><br><span>${escapeHtml(selections.step2)}</span></div></div>
+      </div>
+
+      <div style="margin-top:14px">
+        <b>Tajna reč:</b>
+        <input class="input" id="pw" placeholder="upiši…" />
+        <div class="row" style="margin-top:10px">
+          <button class="btn-primary" id="unlock">Otključaj 💛</button>
+          <button class="btn-ghost" id="justTalk">Ne treba šifra — samo pričamo</button>
+        </div>
+        <div class="tiny" style="margin-top:8px">Ako uneseš tačno, sledi pitanje sa “Da” (a drugo dugme beži 😄).</div>
+      </div>
+    `);
+
+    const attachYesNoHandlers = ()=>{
+      // "DA" → love page + konfeti
+      $("#yes").addEventListener("click", ()=>{
+        $("#mainWrap").classList.add("hidden");
+        $("#lovePage").classList.remove("hidden");
+        bigConfetti();
+      });
+
+      // "Treba mi vremena" → beži (desktop + mobile)
+      const needBtn = $("#needTime");
+
+      const runAway = ()=>{
+        needBtn.style.position = "fixed";
+        const pad = 16;
+        const w = needBtn.offsetWidth || 160;
+        const h = needBtn.offsetHeight || 48;
+        const x = pad + Math.random() * (window.innerWidth - w - pad*2);
+        const y = pad + Math.random() * (window.innerHeight - h - pad*2);
+        needBtn.style.left = x + "px";
+        needBtn.style.top  = y + "px";
+      };
+
+      needBtn.addEventListener("mouseover", runAway);
+
+      needBtn.addEventListener("touchstart", (e)=>{
+        e.preventDefault();
+        runAway();
+      }, { passive: false });
+    };
+
+    $("#unlock").addEventListener("click", ()=>{
+      const pw = ($("#pw").value || "").trim().toLowerCase();
+      if(pw === secretWord.toLowerCase()){
+        bigConfetti();
+        showStatus(`
+          <b>Otključano ✅</b><br><br>
+          Djiki, izvini. Volim te i važan si mi. Ne želim da se svađamo — želim da rastemo.<br>
+          <b>Da li možemo da krenemo ispočetka danas?</b> 🧸💛<br><br>
+          <div class="row">
+            <button class="btn-good" id="yes">Da 🫶</button>
+            <button class="btn-ghost" id="needTime">Treba mi vremena</button>
+          </div>
+        `);
+        attachYesNoHandlers();
+      } else {
+        popToast("Hm… probaj opet 🧸 (hint: djikica)");
+        softConfetti(8);
+      }
+    });
+
+    $("#justTalk").addEventListener("click", ()=>{
+      bigConfetti();
+      showStatus(`
+        <b>Dogovoreno.</b><br><br>
+        Ne treba šifra. Samo mi je važno da te čujem i da ti pokažem da mi je stalo.<br>
+        <b>Ja sam tu. Kad god.</b> 💛<br><br>
+        <div class="row">
+          <button class="btn-good" id="yes">Da 🫶</button>
+          <button class="btn-ghost" id="needTime">Treba mi vremena</button>
+        </div>
+      `);
+      attachYesNoHandlers();
+    });
+
+    stepRow.classList.remove("hidden");
+    btnNext.classList.add("hidden");
+    btnBack.classList.remove("hidden");
+    btnSkip.classList.add("hidden");
+  }
+
+  function labelForStep0(v){
+    const map = {
+      cujem: "Da te čujem bez prekidanja.",
+      smirimo: "Da se smirimo i spustimo tenziju.",
+      zagrlimo: "Da se zbližimo umesto da se udaljimo."
+    };
+    return map[v] || "—";
+  }
+
+  function labelsForStep1(arr){
+    const map = {
+      bez_pasivne: "Bez pasivne agresije",
+      pauza: "Pauza kad eskalira",
+      jedno_po_jedno: "Jedno po jedno",
+      zagrljaj_pre: "Zagrljaj pre spavanja"
+    };
+    return arr.map(x=> map[x] || x);
+  }
+
+  // Buttons flow
+  btnStart.addEventListener("click", ()=>{
+    stepIndex = 0;
+    softConfetti(20);
+    renderStep();
+  });
+
+  btnPeek.addEventListener("click", ()=>{
+    showStatus(`
+      <b>Brzi peek 👀</b><br>
+      Ovo je sajt za izvinjenje. Ima 3 koraka i kraj sa porukom.<br>
+      Ako želiš pun doživljaj: klikni <b>Kreni</b>.
+    `);
+    setProgress(22);
+    startRow.classList.remove("hidden");
+  });
+
+  btnNext.addEventListener("click", ()=>{
+    if(!canGoNext()){
+      popToast(stepIndex===0 ? "Izaberi jednu opciju 💛"
+                : stepIndex===1 ? "Izaberi tačno 2 pravila 🧸"
+                : "Upiši mini-plan (bar 3 slova) ✍️");
+      return;
+    }
+
+    if(stepIndex < steps.length-1){
+      stepIndex++;
+      softConfetti(18);
+      renderStep();
+    } else {
+      finalScreen();
+    }
+  });
+
+  btnBack.addEventListener("click", ()=>{
+    if(stepIndex <= 0){
+      stepIndex = -1;
+      title.textContent = "Hej, Djiki… 💛";
+      subtitle.innerHTML =
+        `Ja sam tvoja <b>Djikica</b>. Znam da smo se sinoć posvađali.
+         Napravila sam mali interaktivni sajt da ti pokažem da mi je stalo i da želim da popravim stvari.`;
+      hideStatus();
+      stepRow.classList.add("hidden");
+      startRow.classList.remove("hidden");
+      btnNext.classList.remove("hidden");
+      btnSkip.classList.remove("hidden");
+      setProgress(15);
+      return;
+    }
+    stepIndex--;
+    renderStep();
+  });
+
+  btnSkip.addEventListener("click", ()=>{
+    finalScreen();
+  });
+
+  // ===== Toast =====
+  let toastTimer = null;
+  function popToast(msg){
+    const el = document.createElement("div");
+    el.textContent = msg;
+    el.style.position = "fixed";
+    el.style.left = "50%";
+    el.style.bottom = "22px";
+    el.style.transform = "translateX(-50%)";
+    el.style.padding = "10px 14px";
+    el.style.borderRadius = "999px";
+    el.style.background = "rgba(0,0,0,.55)";
+    el.style.border = "1px solid rgba(255,255,255,.16)";
+    el.style.backdropFilter = "blur(10px)";
+    el.style.boxShadow = "0 16px 35px rgba(0,0,0,.35)";
+    el.style.zIndex = 100;
+    el.style.fontWeight = "650";
+    document.body.appendChild(el);
+
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(()=> el.remove(), 1600);
+  }
+
+  function escapeHtml(s){
+    return String(s)
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
+  }
+
+  // ===== Confetti =====
+  const canvas = $("#confetti");
+  const ctx = canvas.getContext("2d");
+  let W=0,H=0;
+  function resize(){
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  let confetti = [];
+  function makeConfetti(n){
+    const arr = [];
+    for(let i=0;i<n;i++){
+      arr.push({
+        x: Math.random()*W,
+        y: -20 - Math.random()*H*0.2,
+        r: 3 + Math.random()*4,
+        vy: 2 + Math.random()*4,
+        vx: -2 + Math.random()*4,
+        a: Math.random()*Math.PI*2,
+        va: -0.2 + Math.random()*0.4,
+        life: 120 + Math.random()*80
+      });
+    }
+    return arr;
+  }
+
+  function softConfetti(n=20){
+    confetti = confetti.concat(makeConfetti(n));
+    animate();
+  }
+  function bigConfetti(){
+    confetti = confetti.concat(makeConfetti(220));
+    animate();
+  }
+
+  let animating = false;
+  function animate(){
+    if(animating) return;
+    animating = true;
+
+    const loop = ()=>{
+      ctx.clearRect(0,0,W,H);
+      confetti = confetti.filter(p=> p.life > 0 && p.y < H+40);
+
+      for(const p of confetti){
+        p.life -= 1;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.a += p.va;
+        p.vx *= 0.995;
+        p.vy *= 0.995;
+        p.vy += 0.03;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.a);
+        ctx.fillStyle = `rgba(255,255,255,${0.25 + Math.random()*0.35})`;
+        ctx.fillRect(-p.r, -p.r, p.r*2.4, p.r*1.2);
+        ctx.restore();
+      }
+
+      if(confetti.length > 0){
+        requestAnimationFrame(loop);
+      } else {
+        animating = false;
+        ctx.clearRect(0,0,W,H);
+      }
+    };
+    requestAnimationFrame(loop);
+  }
+</script>
+</body>
+</html>
